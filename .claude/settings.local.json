@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import pyorbbecsdk; print\\('pyorbbecsdk OK', pyorbbecsdk.__file__\\)\")",
+      "Bash(pip list *)",
+      "Read(//home/yzxoi/miniconda3/**)",
+      "Bash(conda env *)",
+      "Bash(python3 -c \"import pyorbbecsdk; print\\('pyorbbecsdk', pyorbbecsdk.__file__\\)\")",
+      "Bash(python3 -c \"import pyrealsense2; print\\('rs ok'\\)\")",
+      "Bash(uv pip *)",
+      "Bash(.venv/bin/python -c ' *)"
+    ]
+  }
+}

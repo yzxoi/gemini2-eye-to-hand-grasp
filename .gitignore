@@ -1,0 +1,40 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# ---- virtualenv ----
+.venv/
+venv/
+env/
+
+# ---- CUDA / C++ build artifacts ----
+build/
+dist/
+*.so
+*.o
+
+# ---- model weights (download separately, see SETUP_GRASPNET.md) ----
+grounding-dino-base/
+**/grounding-dino-base/
+*.tar
+*.safetensors
+*.bin
+
+# ---- large / generated data ----
+graspnet-baseline/VLM_related/
+calib_imgs/
+6d/calibration_images/
+Log/
+*.npy
+result.jpg
+
+# ---- machine-specific calibration outputs ----
+save_parms/
+6d/T_camera2base.yaml
+6d/T_camera2end.yaml
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
