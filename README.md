@@ -7,6 +7,9 @@ ArUco & chessboard hand-eye calibration, Grounding DINO open-vocabulary detectio
 > **Eye-to-hand**: the camera is fixed in the world (not mounted on the arm). The camera→base
 > transform `T_camera2base` is a fixed rigid matrix, used to map detected/grasp poses from the
 > camera frame into the robot base frame.
+>
+> An **eye-in-hand** variant (camera mounted on the end-effector) is also included — see
+> `6d_eye_in_hand/` and `graspnet-baseline/1.verify_grasp_eye_in_hand.py` (`SETUP_EYE_IN_HAND.md`).
 
 ## Hardware / stack
 - Camera: Orbbec Gemini 2 (`pyorbbecsdk2`)
@@ -22,9 +25,11 @@ ArUco & chessboard hand-eye calibration, Grounding DINO open-vocabulary detectio
 | `4.3d_calibrate_test.py` | Simple ArUco eye-to-hand calibration + pick demo |
 | `5.dino_detect.py`, `6.dino_grasp.py` | Grounding DINO detection / detect-and-grasp |
 | `6d/` | Chessboard hand-eye calibration (eye-to-hand) → `T_camera2base` |
-| `graspnet-baseline/` | GraspNet 6-DoF grasping (`1.verify_grasp.py`, VLM pipeline `2`+`3`) |
+| `6d_eye_in_hand/` | Chessboard hand-eye calibration (eye-in-hand) → `T_camera2end` |
+| `graspnet-baseline/` | GraspNet 6-DoF grasping (`1.verify_grasp.py` + eye-in-hand variant, VLM pipeline `2`+`3`) |
 | `SETUP_ORBBEC.md` | Camera setup, env, ArUco calibration, 6d workflow |
-| `SETUP_GRASPNET.md` | GraspNet env/build, calibration → grasp workflow, gotchas |
+| `SETUP_GRASPNET.md` | GraspNet env/build, eye-to-hand calibration → grasp workflow, gotchas |
+| `SETUP_EYE_IN_HAND.md` | Eye-in-hand calibration → grasp workflow (camera on the arm) |
 
 ## Quick start
 See **`SETUP_ORBBEC.md`** (camera + calibration) and **`SETUP_GRASPNET.md`** (grasping).
