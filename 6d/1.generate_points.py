@@ -71,9 +71,15 @@ class GeneratePoints:
             print(f"创建文件夹 {folder_path} 时出错: {e}")
 
     def get_degrees(self):
-        """持续获取机械臂关节角度的线程函数"""
+        """持续获取机械臂关节角度的线程函数
+
+        get_motor_angles() 在 CAN 总线阻塞时会返回 None（或含 None 的列表），
+        只在读到完整有效角度时才更新，避免把上一帧的有效值覆盖成 None。
+        """
         while self.in_free_mode:
-            self.motors_degrees = self.episode_app.get_motor_angles()
+            degrees = self.episode_app.get_motor_angles()
+            if degrees is not None and None not in degrees:
+                self.motors_degrees = degrees
             
             
 
@@ -173,8 +179,8 @@ class GeneratePoints:
                 key = cv2.waitKey(1)
                 # -------- 保存逻辑 --------
                 if key == 32:  # SPACE
-                    # 判断self.motors_degrees是否含有None
-                    if None in self.motors_degrees:
+                    # 判断self.motors_degrees是否为空或含有None
+                    if self.motors_degrees is None or None in self.motors_degrees:
                         print('机械臂角度读取失败，请重新托举')
                         continue
                     
