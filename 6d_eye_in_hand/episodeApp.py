@@ -38,19 +38,23 @@ class EpisodeAPP:
         # 转为弧度
         radian_range_list = [[np.deg2rad(degree) for degree in pair] for pair in degree_range_list]
 
-        # 定义DH
+        # 定义DH（仅 calculate_T_based_on_degrees 等正运动学辅助函数使用，
+        # 标定/抓取流程用不到）。roboticstoolbox 未安装时跳过构建，避免无法实例化。
         scale = 1
-        self.EpRobot = DHRobot(
-            [
-                            RevoluteDH(d=166/scale,a= 55/scale, alpha=np.pi/2,qlim=np.array(radian_range_list[0])),
-                            RevoluteDH(d=0, a=200/scale, alpha=0, qlim=np.array(radian_range_list[1])),
-                            RevoluteDH(d=0, a=56/scale, alpha=np.pi/2,qlim=np.array(radian_range_list[2])),
-                            RevoluteDH(d=192/scale, a=0, alpha=-np.pi/2,qlim=np.array(radian_range_list[3])),
-                            RevoluteDH(d=0, a=0, alpha=np.pi/2,qlim=np.array(radian_range_list[4])),
-                            RevoluteDH(d=55/scale, a=0, alpha=0,qlim=np.array(radian_range_list[5])),
-            ],
-            name="EpRobot",
-        )
+        if 'DHRobot' in globals():
+            self.EpRobot = DHRobot(
+                [
+                                RevoluteDH(d=166/scale,a= 55/scale, alpha=np.pi/2,qlim=np.array(radian_range_list[0])),
+                                RevoluteDH(d=0, a=200/scale, alpha=0, qlim=np.array(radian_range_list[1])),
+                                RevoluteDH(d=0, a=56/scale, alpha=np.pi/2,qlim=np.array(radian_range_list[2])),
+                                RevoluteDH(d=192/scale, a=0, alpha=-np.pi/2,qlim=np.array(radian_range_list[3])),
+                                RevoluteDH(d=0, a=0, alpha=np.pi/2,qlim=np.array(radian_range_list[4])),
+                                RevoluteDH(d=55/scale, a=0, alpha=0,qlim=np.array(radian_range_list[5])),
+                ],
+                name="EpRobot",
+            )
+        else:
+            self.EpRobot = None
 
 
     def send_command(self, command):
